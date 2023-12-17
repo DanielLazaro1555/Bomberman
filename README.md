@@ -1,2 +1,0 @@
-# Bomberman
-Bomberman Clasico
