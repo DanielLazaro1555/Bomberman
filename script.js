@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const bullet = document.createElement('div');
         bullet.className = 'bullet';
         bullet.style.left = playerPosition + '%';
+        bullet.style.bottom = '60px'; // Ajusta la altura inicial de la bala según tus necesidades
         container.appendChild(bullet);
 
         moveBullet(bullet);
