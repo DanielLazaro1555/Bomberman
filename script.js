@@ -9,10 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleKeyPress(event) {
+        const movementIncrement = 2; // Ajusta según tus preferencias de movimiento
+
         if (event.key === 'ArrowLeft' && playerPosition > 0) {
-            playerPosition -= 5;
+            playerPosition -= movementIncrement;
         } else if (event.key === 'ArrowRight' && playerPosition < 100) {
-            playerPosition += 5;
+            playerPosition += movementIncrement;
         } else if (event.key === 's' || event.key === 'S') {
             createBullet();
         }
