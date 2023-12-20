@@ -129,3 +129,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener('keydown', handleKeyPress);
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    var lazyVideo = document.querySelector('.lazy-video-container');
+    var video = document.querySelector('#video-background');
+    var source = video.querySelector('source');
+
+    var options = {
+      root: null, // Use the viewport as the root
+      threshold: 0.5 // Trigger when 50% of the video is visible
+    };
+
+    var observer = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          // Load the video source when it becomes visible
+          source.src = source.getAttribute('data-src');
+          video.load();
+          observer.unobserve(lazyVideo);
+        }
+      });
+    }, options);
+
+    observer.observe(lazyVideo);
+  });
