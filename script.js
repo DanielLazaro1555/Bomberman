@@ -2,8 +2,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const video = document.querySelector('#video-background');
     const player = document.querySelector('.player');
     const container = document.querySelector('.game-container');
+    const pauseModal = new bootstrap.Modal(document.getElementById('pauseModal')); // Crea una instancia del modal Bootstrap
     let playerPosition = 50; // posición inicial del jugador en porcentaje
     let score = 0;
+    let asteroidInterval;
+    const asteroids = [];
 
     // Inicia la reproducción del video al cargar la página
     video.play();
@@ -16,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
             video.play();
         }
     });
+
     function updatePlayerPosition() {
         player.style.left = playerPosition + '%';
     }
@@ -29,6 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
             playerPosition += movementIncrement;
         } else if (event.key === 's' || event.key === 'S') {
             createBullet();
+        } else if (event.key === 'p' || event.key === 'P') {
+            togglePause(); // Agregado: Maneja la tecla "P" para pausar/reanudar
         }
 
         updatePlayerPosition();
@@ -63,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 16); // Aproximadamente 60 FPS
     }
 
-
     function checkCollisionWithEnemies(bullet, enemies) {
         const bulletRect = bullet.getBoundingClientRect();
 
@@ -88,37 +93,40 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-
     function createEnemy() {
         const enemy = document.createElement('div');
         enemy.className = 'enemy';
         enemy.style.left = Math.random() * (container.clientWidth - 30) + 'px';
         container.appendChild(enemy);
+        asteroids.push(enemy);
 
         moveEnemy(enemy);
     }
 
     function moveEnemy(enemy) {
-        const enemySpeed = 3;
-        const enemyInterval = setInterval(() => {
+        enemy.interval = setInterval(() => {
             const enemyPosition = parseFloat(enemy.style.top) || 0;
-            enemy.style.top = enemyPosition + enemySpeed + 'px';
+            enemy.style.top = enemyPosition + 3 + 'px';
 
             if (enemyPosition > container.clientHeight) {
-                clearInterval(enemyInterval);
+                clearInterval(enemy.interval);
                 if (container.contains(enemy)) {
                     container.removeChild(enemy);
+                    const index = asteroids.indexOf(enemy);
+                    if (index !== -1) {
+                        asteroids.splice(index, 1);
+                    }
                 }
             }
         }, 16); // Aproximadamente 60 FPS
     }
-
 
     function incrementScore() {
         score += 10; // Puedes ajustar la cantidad de puntos según tu preferencia
         updateScoreDisplay();
         animateScoreIncrease();
     }
+
     function animateScoreIncrease() {
         const scoreDisplay = document.querySelector('.score');
         scoreDisplay.classList.add('increase');
@@ -135,10 +143,54 @@ document.addEventListener('DOMContentLoaded', function () {
         scoreDisplay.textContent = `Score: ${score}`;
     }
 
-    setInterval(() => {
-        createEnemy();
-    }, 2000); // Genera un enemigo cada 2000 milisegundos (2 segundos)
+    function togglePause() {
+        if (video.paused) {
+            // Si el video está pausado, reanuda el juego
+            video.play();
+            startGame();
+            asteroids.forEach((asteroid) => moveEnemy(asteroid));
+            // Oculta el modal de pausa
+            pauseModal.hide();
+        } else {
+            // Si el video está reproduciéndose, pausa el juego
+            video.pause();
+            clearInterval(asteroidInterval);
+            asteroids.forEach((asteroid) => clearInterval(asteroid.interval));
+            // Muestra el modal de pausa
+            pauseModal.show();
+        }
+    }
+
+    function startGame() {
+        // Limpia el intervalo existente antes de comenzar uno nuevo
+        clearInterval(asteroidInterval);
+        asteroidInterval = setInterval(() => {
+            createEnemy();
+        }, 2000); // Genera un enemigo cada 2000 milisegundos (2 segundos)
+    }
+
+    startGame();
 
     document.addEventListener('keydown', handleKeyPress);
-});
 
+    // Evento que se activa cuando la pestaña pierde el foco
+    window.addEventListener('blur', function () {
+        // Pausa la reproducción del video y cualquier otra actividad del juego
+        video.pause();
+        clearInterval(asteroidInterval); // Pausa la generación de asteroides
+        asteroids.forEach((asteroid) => clearInterval(asteroid.interval)); // Pausa el movimiento de asteroides existentes
+        // Implementa lógica adicional de pausa aquí...
+        pauseModal.show();
+    });
+
+    // Evento que se activa cuando la pestaña obtiene el foco
+    window.addEventListener('focus', function () {
+        // Reanuda la reproducción del video y cualquier otra actividad del juego
+        video.play();
+        startGame(); // Reanuda la generación de asteroides
+        asteroids.forEach((asteroid) => moveEnemy(asteroid)); // Reanuda el movimiento de asteroides existentes
+        // Implementa lógica adicional de reanudación aquí...
+        pauseModal.hide();
+    });
+
+});

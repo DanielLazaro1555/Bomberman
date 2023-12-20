@@ -11,8 +11,24 @@
 </head>
 
 <body>
+  <!-- Modal de pausa -->
+  <div class="modal" id="pauseModal" tabindex="-1" aria-labelledby="pauseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="pauseModalLabel">Juego en Pausa</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          El juego está en pausa. Presiona "P" para reanudar.
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
   <video autoplay muted loop id="video-background">
-    <source src="VideoFondo.mp4" type="video/mp4"> <!-- Reemplaza 'tu-video.mp4' con la ruta correcta de tu video -->
+    <source src="VideoFondo.mp4" type="video/mp4">
   </video>
   <div class="container mt-3">
     <div class="row">
@@ -26,7 +42,7 @@
   </div>
   <script src="script.js"></script>
   <!-- Bootstrap JS y Popper.js (necesario para algunos componentes de Bootstrap) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
