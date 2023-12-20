@@ -1,8 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const video = document.querySelector('#video-background');
     const player = document.querySelector('.player');
     const container = document.querySelector('.game-container');
     let playerPosition = 50; // posición inicial del jugador en porcentaje
     let score = 0;
+
+
+    // Evento que se activa cuando el video llega al final
+    video.addEventListener('ended', function () {
+        // Espera 1 segundo antes de reiniciar el video
+        setTimeout(() => {
+            video.currentTime = 0; // Reinicia la reproducción al principio
+            video.play();
+        }, 1000);
+    });
+    // Inicia la reproducción del video al cargar la página
+    video.play();
 
     function updatePlayerPosition() {
         player.style.left = playerPosition + '%';
@@ -129,3 +142,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener('keydown', handleKeyPress);
 });
+
