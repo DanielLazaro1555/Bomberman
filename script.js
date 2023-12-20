@@ -72,6 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 16); // Aproximadamente 60 FPS
     }
 
+
+
     // Crear una única instancia de audio
     const collisionSound = new Audio('Explocion.mp3');
 
@@ -91,14 +93,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (container.contains(bullet)) {
                     container.removeChild(bullet);
                 }
-                if (container.contains(enemy)) {
-                    container.removeChild(enemy);
-                }
+
                 playCollisionSound(); // Agregado: Reproduce el sonido de colisión
                 incrementScore();
+
+                // Cambia el fondo del enemigo al chocar
+                enemy.style.backgroundImage = "url('Asteroidep.png')";
+
+                // Espera 1 segundo antes de eliminar el enemigo
+                setTimeout(() => {
+                    if (container.contains(enemy)) {
+                        container.removeChild(enemy);
+                    }
+                }, 100); // 1000 milisegundos = 1 segundo
             }
         });
     }
+
+
 
     function playCollisionSound() {
         // Reiniciar el sonido en caso de que aún se esté reproduciendo
