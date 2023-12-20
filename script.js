@@ -131,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+//Script Video mejora
 document.addEventListener('DOMContentLoaded', function () {
     var lazyVideo = document.querySelector('.lazy-video-container');
     var video = document.querySelector('#video-background');
