@@ -10,14 +10,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Evento que se activa cuando el video alcanza el tiempo final
     video.addEventListener('timeupdate', function () {
-        // Puedes ajustar el valor de 1 según tus necesidades
-        if (video.currentTime >= video.duration - 1) {
+        // Puedes ajustar el valor según tus necesidades
+        if (video.currentTime >= video.duration) {
             video.currentTime = 0; // Reinicia la reproducción al principio
             video.play();
         }
     });
-
-
     function updatePlayerPosition() {
         player.style.left = playerPosition + '%';
     }
