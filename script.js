@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Implementa lógica adicional de reanudación aquí...
         pauseModal.hide();
     });
-    // Event listener para la tecla F5 (código de tecla 116)
+    // Event listener para la tecla F5 (código de tecla 116) usando ASCII
     document.addEventListener('keydown', function (event) {
         if (event.keyCode === 116) {
             // Redirige a la página "index.html" al presionar F5
