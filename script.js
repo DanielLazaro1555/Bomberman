@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const video = document.querySelector('#video-background');
     const player = document.querySelector('.player');
     const container = document.querySelector('.game-container');
+    const backgroundMusic = document.getElementById('backgroundMusic');
     const pauseModal = new bootstrap.Modal(document.getElementById('pauseModal')); // Crea una instancia del modal Bootstrap
     let playerPosition = 50; // posición inicial del jugador en porcentaje
     let score = 0;
@@ -10,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Inicia la reproducción del video al cargar la página
     video.play();
+    // Inicia la reproducción de la música de fondo
+    backgroundMusic.play();
 
     // Evento que se activa cuando el video alcanza el tiempo final
     video.addEventListener('timeupdate', function () {
@@ -69,12 +72,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 16); // Aproximadamente 60 FPS
     }
 
+    // Crear una única instancia de audio
+    const collisionSound = new Audio('Explocion.mp3');
+
     function checkCollisionWithEnemies(bullet, enemies) {
         const bulletRect = bullet.getBoundingClientRect();
-    
+
         enemies.forEach((enemy) => {
             const enemyRect = enemy.getBoundingClientRect();
-    
+
             if (
                 bulletRect.bottom > enemyRect.top &&
                 bulletRect.top < enemyRect.bottom &&
@@ -95,9 +101,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function playCollisionSound() {
-        const collisionSound = document.getElementById('collisionSound');
+        // Reiniciar el sonido en caso de que aún se esté reproduciendo
+        collisionSound.currentTime = 0;
         collisionSound.play();
     }
+
+
+
 
     function createEnemy() {
         const enemy = document.createElement('div');
@@ -198,5 +208,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Implementa lógica adicional de reanudación aquí...
         pauseModal.hide();
     });
+    
 
 });

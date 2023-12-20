@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenida al Juego</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            /* Agrega la imagen de fondo */
+            background-image: url('Demo.png');
+            /* Ajusta la opacidad según tus preferencias (0.5 = 50%) */
+            background-color: rgba(255, 255, 255, 0.5);
+            /* Ajusta el tamaño y posición de la imagen de fondo */
+            background-size: cover;
+            background-position: center;
+            /* Asegura que la imagen de fondo cubra toda la pantalla */
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Añade otros estilos según sea necesario */
+        .container {
+            text-align: center;
+            color: #fff; /* Ajusta el color del texto para que sea visible en la imagen de fondo */
+        }
+    </style>
+    <script>
+        // Redirige a bienvenida.html si no estás ya en esa página
+        if (!window.location.pathname.includes("/bienvenida.html")) {
+            window.location.href = "/bienvenida.html";
+        }
+    </script>
+    
+</head>
+
+<body>
+    <!-- Contenido de la bienvenida -->
+    <div class="container mt-5">
+        <h1>¡Bienvenido al Juego!</h1>
+        <p>Haz clic en el botón para comenzar</p>
+        <button class="btn btn-primary" onclick="startGame()">Comenzar</button>
+    </div>
+
+    <!-- Bootstrap JS y Popper.js (necesario para algunos componentes de Bootstrap) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function startGame() {
+            // Redirige a la página principal del juego
+            window.location.href = "game.html";
+        }
+    </script>
+</body>
+
+</html>
