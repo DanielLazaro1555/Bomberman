@@ -71,10 +71,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function checkCollisionWithEnemies(bullet, enemies) {
         const bulletRect = bullet.getBoundingClientRect();
-
+    
         enemies.forEach((enemy) => {
             const enemyRect = enemy.getBoundingClientRect();
-
+    
             if (
                 bulletRect.bottom > enemyRect.top &&
                 bulletRect.top < enemyRect.bottom &&
@@ -88,9 +88,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (container.contains(enemy)) {
                     container.removeChild(enemy);
                 }
+                playCollisionSound(); // Agregado: Reproduce el sonido de colisión
                 incrementScore();
             }
         });
+    }
+
+    function playCollisionSound() {
+        const collisionSound = document.getElementById('collisionSound');
+        collisionSound.play();
     }
 
     function createEnemy() {
