@@ -5,17 +5,18 @@ document.addEventListener('DOMContentLoaded', function () {
     let playerPosition = 50; // posición inicial del jugador en porcentaje
     let score = 0;
 
-
-    // Evento que se activa cuando el video llega al final
-    video.addEventListener('ended', function () {
-        // Espera 1 segundo antes de reiniciar el video
-        setTimeout(() => {
-            video.currentTime = 0; // Reinicia la reproducción al principio
-            video.play();
-        }, 1000);
-    });
     // Inicia la reproducción del video al cargar la página
     video.play();
+
+    // Evento que se activa cuando el video alcanza el tiempo final
+    video.addEventListener('timeupdate', function () {
+        // Puedes ajustar el valor de 1 según tus necesidades
+        if (video.currentTime >= video.duration - 1) {
+            video.currentTime = 0; // Reinicia la reproducción al principio
+            video.play();
+        }
+    });
+
 
     function updatePlayerPosition() {
         player.style.left = playerPosition + '%';
@@ -123,12 +124,12 @@ document.addEventListener('DOMContentLoaded', function () {
     function animateScoreIncrease() {
         const scoreDisplay = document.querySelector('.score');
         scoreDisplay.classList.add('increase');
-      
+
         // Después de un breve tiempo, quita la clase de aumento para volver al tamaño normal
         setTimeout(() => {
-          scoreDisplay.classList.remove('increase');
+            scoreDisplay.classList.remove('increase');
         }, 200); // Ajusta la duración de la animación aquí (en milisegundos)
-      }
+    }
 
     function updateScoreDisplay() {
         // Actualiza el marcador de puntuación en la interfaz
