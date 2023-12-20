@@ -11,9 +11,11 @@
 </head>
 
 <body>
-  <video autoplay muted loop id="video-background" preload="none" loading="lazy">
-    <source src="Comp 1.mp4" type="video/mp4">
-  </video>
+  <div class="lazy-video-container">
+    <video autoplay muted loop id="video-background" preload="none">
+      <source data-src="VideoFondo.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="container mt-3">
     <div class="row">
       <div class="col-12">
