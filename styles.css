@@ -25,18 +25,21 @@ body {
 
 .player {
   width: 100px;
-  height: 100px;
+  height: 130px;
   background-image: url('cohete.svg');
+  background-size: cover;
   position: absolute;
-  bottom: 0;
+  bottom: 20px; /* Ajusta este valor para colocar el cohete más arriba */
   left: 50%;
   transform: translateX(-50%);
 }
 
+
+
 .bullet {
   width: 5px;
   height: 15px;
-  background-color: #6000fc;
+  background-color: #ffffff;
   position: absolute;
   bottom: 0px;
   /* Altura inicial de la bala */
@@ -58,11 +61,13 @@ body {
   width: 60px;
   height: 60px;
   background-image: url('asteoride.svg');
+  background-size: cover; /* Ajusta el tamaño de la imagen para cubrir completamente el contenedor */
   position: absolute;
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
 }
+
 
 .score {
   position: absolute;
