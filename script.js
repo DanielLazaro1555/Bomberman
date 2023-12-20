@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', function () {
             createBullet();
         } else if (event.key === 'p' || event.key === 'P') {
             togglePause(); // Agregado: Maneja la tecla "P" para pausar/reanudar
+        } else if (event.key === 'm' || event.key === 'M') {
+            toggleBackgroundMusic(); // Agregado: Maneja la tecla "m" para pausar la musica/reanudar la musica
         }
 
         updatePlayerPosition();
@@ -213,5 +215,13 @@ document.addEventListener('DOMContentLoaded', function () {
             window.location.href = 'index.html';
         }
     });
+    function toggleBackgroundMusic() {
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        if (backgroundMusic.paused) {
+            backgroundMusic.play();
+        } else {
+            backgroundMusic.pause();
+        }
+    }
 
 });

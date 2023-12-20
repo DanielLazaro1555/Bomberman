@@ -92,3 +92,31 @@ body {
   font-size: 32px;
   /* Tamaño más grande durante la animación */
 }
+
+/* Estilos para el botón flotante */
+.floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para el contenedor de información flotante */
+.floating-info {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: rgba(46, 204, 112, 0); /* Fondo verde con opacidad del 80% */
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  display: block;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #fff; /* Borde blanco de 1 píxel */
+}
