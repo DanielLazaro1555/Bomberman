@@ -9,25 +9,72 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            /* Agrega la imagen de fondo */
-            background-image: url('Demo.png');
-            /* Ajusta la opacidad según tus preferencias (0.5 = 50%) */
-            background-color: rgba(255, 255, 255, 0.5);
-            /* Ajusta el tamaño y posición de la imagen de fondo */
-            background-size: cover;
-            background-position: center;
-            /* Asegura que la imagen de fondo cubra toda la pantalla */
+            /* Establece el tamaño y posición del cuerpo */
             height: 100vh;
             margin: 0;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            /* Añade posición relativa para poder posicionar el pseudo-elemento */
+
+            /* Agrega la imagen de fondo */
+            background-image: url('GalaxyPortadaWeb.jpg');
+            background-size: cover;
+            background-position: center 60%;
         }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            /*background-color: rgba(0, 0, 0, 0.651);*/
+            pointer-events: none;
+            /* Esta línea permite que los eventos pasen a través del pseudo-elemento */
+        }
+
+
+
 
         /* Añade otros estilos según sea necesario */
         .container {
             text-align: center;
-            color: #fff; /* Ajusta el color del texto para que sea visible en la imagen de fondo */
+            color: #fff;
+            position: relative;
+            z-index: 1;
+            margin-bottom: -250px;
+        }
+
+        .container button {
+            margin-top: 10px;
+            /* Ajusta el espacio entre el párrafo y el botón según sea necesario */
+            font-size: 2em;
+            /* Ajusta el tamaño inicial del botón */
+            animation: pulse 1s infinite alternate;
+            /* Define la animación solo para el botón */
+        }
+
+        @keyframes pulse {
+            to {
+                transform: scale(1.2);
+                /* Ajusta el factor de escala al agrandar el botón */
+            }
+        }
+
+        .container p {
+            margin-top: 10px;
+            font-size: 20px;
+            /* Ajusta el espacio entre el párrafo y el botón según sea necesario */
+        }
+
+        .container h1 {
+            font-size: 5.5em;
+            /* Ajusta el tamaño de la letra según sea necesario */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            /* Agrega un efecto de sombra */
         }
     </style>
 </head>
@@ -35,7 +82,6 @@
 <body>
     <!-- Contenido de la bienvenida -->
     <div class="container mt-5">
-        <h1>¡Galaxy guardian!</h1>
         <p>Haz clic en el botón para comenzar</p>
         <button class="btn btn-primary" onclick="startGame()">Comenzar</button>
     </div>
