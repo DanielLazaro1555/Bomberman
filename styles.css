@@ -58,9 +58,9 @@ body {
 }
 
 .enemy {
-  width: 100px;
-  height: 100px;
-  background-image: url('asteoride.svg');
+  width: 160px;
+  height: 120px;
+  background-image: url('asteroide.svg');
   background-size: cover; /* Ajusta el tamaño de la imagen para cubrir completamente el contenedor */
   position: absolute;
   bottom: 100%;
